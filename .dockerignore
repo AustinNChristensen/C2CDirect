@@ -1,0 +1,14 @@
+.git
+.github
+.next
+.vinext
+dist
+node_modules
+outputs
+work
+backend/.venv
+backend/.env
+deploy/single-host/.env
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache

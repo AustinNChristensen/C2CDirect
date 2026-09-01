@@ -1,0 +1,48 @@
+[project]
+name = "c2cdirect-api"
+version = "0.1.0"
+description = "AI screening and retrieval API for high-rate C2C engineering roles"
+license = "AGPL-3.0-only"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.116,<1",
+  "uvicorn[standard]>=0.35,<1",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.10,<3",
+  "httpx>=0.28,<1",
+  "langgraph>=0.6,<1",
+  "langchain>=0.3,<1",
+  "langchain-openai>=0.3,<1",
+  "langchain-postgres>=0.0.15,<1",
+  "mcp>=1.13,<2",
+  "psycopg[binary]>=3.2,<4",
+  "structlog>=25,<26",
+  "opentelemetry-api>=1.36,<2",
+  "opentelemetry-sdk>=1.36,<2",
+  "opentelemetry-exporter-otlp-proto-http>=1.36,<2",
+  "asyncpg>=0.30,<1",
+  "pyjwt[crypto]>=2.10,<3",
+  "stripe>=12,<13",
+  "tenacity>=9,<10",
+]
+
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+exclude = ["migrations*", "tests*"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.4,<9", "pytest-asyncio>=1,<2", "pytest-cov>=6,<8", "ruff>=0.12,<1"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+ignore = ["B008"]

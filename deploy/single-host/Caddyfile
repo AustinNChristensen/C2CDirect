@@ -1,0 +1,59 @@
+:8080 {
+  @owner_only host {$APP_DOMAIN}
+  basic_auth @owner_only {
+    operator {$C2CDIRECT_BASIC_AUTH_HASH}
+  }
+
+  handle /api/* {
+    uri strip_prefix /api
+    reverse_proxy {
+      dynamic a {
+        name api
+        port 8000
+        refresh 5s
+      }
+    }
+  }
+
+  handle /mcp* {
+    reverse_proxy {
+      dynamic a {
+        name mcp
+        port 8001
+        refresh 5s
+      }
+    }
+  }
+
+  @api host api.{$APP_DOMAIN}
+  handle @api {
+    reverse_proxy {
+      dynamic a {
+        name api
+        port 8000
+        refresh 5s
+      }
+    }
+  }
+
+  @automation host automation.{$APP_DOMAIN}
+  handle @automation {
+    reverse_proxy {
+      dynamic a {
+        name n8n
+        port 5678
+        refresh 5s
+      }
+    }
+  }
+
+  handle {
+    reverse_proxy {
+      dynamic a {
+        name web
+        port 3000
+        refresh 5s
+      }
+    }
+  }
+}

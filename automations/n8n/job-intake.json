@@ -1,0 +1,45 @@
+{
+  "name": "C2CDirect - compliant job intake",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST", "path": "c2cdirect-job", "responseMode": "lastNode"},
+      "id": "intake-webhook",
+      "name": "Approved source intake",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const j=$json.body??$json; if(!j.title||!j.company||!j.description) throw new Error('title, company, and description are required'); return [{json:{run_id:$execution.id,jobs:[{source:j.source??'n8n',source_url:j.source_url,title:j.title,company:j.company,description:j.description,location:j.location??'Unknown',rate_min:j.rate_min,rate_max:j.rate_max,posted_at:j.posted_at}]}}];"
+      },
+      "id": "normalize",
+      "name": "Validate and normalize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.C2CDIRECT_API_URL}}/v1/ingest/n8n",
+        "sendHeaders": true,
+        "headerParameters": {"parameters": [{"name": "X-Webhook-Secret", "value": "={{$env.C2CDIRECT_WEBHOOK_SECRET || $env.C2CDIRECT_WEBHOOK_SECRET}}"}]},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}"
+      },
+      "id": "screen",
+      "name": "Screen with C2CDirect",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, 300]
+    }
+  ],
+  "connections": {
+    "Approved source intake": {"main": [[{"node": "Validate and normalize", "type": "main", "index": 0}]]},
+    "Validate and normalize": {"main": [[{"node": "Screen with C2CDirect", "type": "main", "index": 0}]]}
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1", "saveDataErrorExecution": "all", "saveDataSuccessExecution": "none"}
+}

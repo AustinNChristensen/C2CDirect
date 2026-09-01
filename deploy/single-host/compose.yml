@@ -1,0 +1,124 @@
+name: c2cdirect
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: c2cdirect
+      POSTGRES_USER: c2cdirect
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in deploy/single-host/.env}
+      APP_DATABASE_PASSWORD: ${APP_DATABASE_PASSWORD:?Set APP_DATABASE_PASSWORD in deploy/single-host/.env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ../../backend/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U c2cdirect -d c2cdirect"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    security_opt: ["no-new-privileges:true"]
+
+  api:
+    build:
+      context: ../../backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://c2cdirect_app:${APP_DATABASE_PASSWORD}@postgres:5432/c2cdirect
+      FRONTEND_ORIGIN: https://${APP_DOMAIN}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    security_opt: ["no-new-privileges:true"]
+
+  mcp:
+    build:
+      context: ../../backend
+    restart: unless-stopped
+    command: ["python", "-m", "app.mcp_server"]
+    env_file: .env
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; s=socket.create_connection(('127.0.0.1',8001),3); s.close()"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    security_opt: ["no-new-privileges:true"]
+
+  web:
+    build:
+      context: ../..
+      dockerfile: Dockerfile.web
+    restart: unless-stopped
+    environment:
+      PORT: "3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    security_opt: ["no-new-privileges:true"]
+
+  n8n:
+    image: n8nio/n8n:1.108.2
+    restart: unless-stopped
+    environment:
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:?Set N8N_ENCRYPTION_KEY in deploy/single-host/.env}
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      N8N_RUNNERS_ENABLED: "true"
+      N8N_HOST: automation.${APP_DOMAIN}
+      N8N_PROTOCOL: https
+      WEBHOOK_URL: https://automation.${APP_DOMAIN}/
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_DATABASE: c2cdirect
+      DB_POSTGRESDB_USER: c2cdirect
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_POSTGRESDB_SCHEMA: n8n
+      C2CDIRECT_API_URL: http://api:8000
+    volumes:
+      - n8n-data:/home/node/.n8n
+    depends_on:
+      postgres:
+        condition: service_healthy
+    security_opt: ["no-new-privileges:true"]
+
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN}
+      C2CDIRECT_BASIC_AUTH_HASH: ${C2CDIRECT_BASIC_AUTH_HASH:?Set C2CDIRECT_BASIC_AUTH_HASH in deploy/single-host/.env}
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      web:
+        condition: service_started
+      api:
+        condition: service_healthy
+      mcp:
+        condition: service_healthy
+    security_opt: ["no-new-privileges:true"]
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.8.0
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      caddy:
+        condition: service_started
+    profiles: ["tunnel"]
+    security_opt: ["no-new-privileges:true"]
+
+volumes:
+  postgres-data:
+  n8n-data:

@@ -1,0 +1,31 @@
+{
+  "name": "C2CDirect - Daily Action Queue",
+  "nodes": [
+    {
+      "parameters": {"rule": {"interval": [{"field": "weeks", "weeksInterval": 1, "triggerAtDay": [1,2,3,4,5], "triggerAtHour": 8}]}},
+      "id": "weekday-trigger",
+      "name": "Weekday 8 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.C2CDIRECT_API_URL || 'http://api:8000'}}/v1/actions/today",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {"timeout": 30000}
+      },
+      "id": "load-actions",
+      "name": "Load Approved Action Queue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 300],
+      "notes": "Configure a least-privilege Signal service credential before activation. This workflow reads only; it never contacts recruiters or applies automatically."
+    }
+  ],
+  "connections": {"Weekday 8 AM": {"main": [[{"node": "Load Approved Action Queue", "type": "main", "index": 0}]]}},
+  "active": false,
+  "settings": {"executionOrder": "v1", "timezone": "America/Denver"},
+  "tags": []
+}

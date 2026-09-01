@@ -1,0 +1,34 @@
+{
+  "run_id": "public-demo-2026-v1",
+  "jobs": [
+    {
+      "source": "fictional-demo",
+      "source_url": "https://example.com/demo/ai-platform-engineer",
+      "title": "Senior AI Platform Engineer (Fictional Demo)",
+      "company": "Example Prime Consulting",
+      "description": "Fictional demonstration only. Twelve-month C2C contract building production agent systems with Python, FastAPI, LangGraph, MCP, retrieval, evaluations, PostgreSQL, pgvector, AWS, observability, and secure multi-tenant APIs. Corp to corp engagement is explicitly accepted and the end client would be disclosed before submission.",
+      "location": "Remote - United States",
+      "rate_min": 140,
+      "rate_max": 165
+    },
+    {
+      "source": "fictional-demo",
+      "source_url": "https://example.com/demo/typescript-engineer",
+      "title": "Senior TypeScript and Node.js Engineer (Fictional Demo)",
+      "company": "Example Technology Partner",
+      "description": "Fictional demonstration only. Contract role designing TypeScript and Node.js services, React interfaces, PostgreSQL schemas, AWS infrastructure, automated tests, and secure REST APIs. The recruiter indicates C2C is available, but the candidate rate and end-client requisition must be verified before submission.",
+      "location": "Remote",
+      "rate_min": 130
+    },
+    {
+      "source": "fictional-demo",
+      "source_url": "https://example.com/demo/w2-only-engineer",
+      "title": "Applied AI Software Engineer - W2 Only (Fictional Demo)",
+      "company": "Example Employer",
+      "description": "Fictional demonstration only. Build Python and TypeScript services using large language models, React, APIs, retrieval, and cloud infrastructure. This opportunity is W2 only, cannot work C2C, and does not accept third-party submissions; Signal should retain it as rejected evidence rather than recommend action.",
+      "location": "Remote",
+      "rate_min": 120,
+      "rate_max": 125
+    }
+  ]
+}
