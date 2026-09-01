@@ -21,5 +21,5 @@ truthful description.
   to cause confusion with the official project.
 
 Forks should use their own name and branding and may state, accurately, that they are derived from
-C2CDirect. These interim guidelines should receive legal review before the first commercial public
-launch and may be replaced by a more formal policy without altering AGPL rights already granted.
+C2CDirect. These interim guidelines may be replaced by a more formal policy without altering AGPL
+rights already granted.

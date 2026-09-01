@@ -1,9 +1,8 @@
 # Third-party license review
 
 This review covers the locked C2CDirect Core dependency graph and the container images referenced by
-the repository as of 2026-08-31. It is an engineering review, not legal advice. Exact package names,
-versions, integrity hashes, and dependency relationships remain authoritative in `pnpm-lock.yaml` and
-`backend/uv.lock`.
+the repository as of 2026-08-31. Exact package names, versions, integrity hashes, and dependency
+relationships remain authoritative in `pnpm-lock.yaml` and `backend/uv.lock`.
 
 ## Application dependencies
 

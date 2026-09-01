@@ -6,7 +6,7 @@ Last updated: 2026-08-29
 The following choices are deliberately not being made yet:
 
 - **No commercial-license template or external code contributions yet.** The community core is
-  AGPL-3.0-only, but commercial terms and a contributor agreement wait for qualified legal review.
+  AGPL-3.0-only, but commercial terms and a contributor agreement remain open project decisions.
 - **No automatic application or outreach sending.** Research and drafting are implemented behind a
   human approval boundary.
 - **No universal provider blacklist.** Provider and job evidence are modeled separately; insufficient

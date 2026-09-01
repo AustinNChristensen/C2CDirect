@@ -1,7 +1,7 @@
 # Contributing
 
-External code contributions are temporarily paused while the project adopts a lawyer-reviewed
-contributor agreement that preserves both AGPL distribution and optional commercial licensing. Please
+External code contributions are temporarily paused while the project finalizes a contributor
+agreement that preserves both AGPL distribution and optional commercial licensing. Please
 open an issue for proposed changes instead of submitting implementation code. Documentation feedback,
 reproducible bug reports, and responsible security reports are welcome.
 

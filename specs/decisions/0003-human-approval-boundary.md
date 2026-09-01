@@ -6,7 +6,7 @@ Date: 2026-08-29
 ## Context
 
 Agentic access is valuable for research, ranking, pipeline management, and drafting. Applications and
-recruiter communications can create legal, reputational, privacy, and commercial commitments.
+recruiter communications can create reputational, privacy, and commercial commitments.
 
 ## Decision
 
@@ -19,6 +19,6 @@ MCP scope alone is not approval.
 
 ## Consequences
 
-Signal can provide high-leverage agentic assistance while preserving user control. Fully autonomous
+C2CDirect can provide high-leverage agentic assistance while preserving user control. Fully autonomous
 application submission is outside the accepted product boundary unless this ADR is superseded after a
-dedicated legal, security, abuse, and user-experience review.
+dedicated policy, security, abuse, and user-experience review.

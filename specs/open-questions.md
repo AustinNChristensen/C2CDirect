@@ -12,7 +12,7 @@ These are unresolved decisions, not implied implementation commitments.
 
 ## Commercial model
 
-- Final commercial-license terms and lawyer-reviewed contributor agreement.
+- Final commercial-license terms and contributor agreement.
 - Exact hosted plan limits for connector count, provenance investigation, and MCP usage.
 - Whether verified provider intelligence is included in Pro, Team, or a separate marketplace tier.
 

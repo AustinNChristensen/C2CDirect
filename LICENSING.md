@@ -27,8 +27,8 @@ repository for commercial-license discussions.
 The license covers files released in this repository. Separately developed hosted control-plane
 services, licensed data, private operational tooling, private connectors, and network intelligence
 are not included merely because they interoperate with the community core. Whether a particular
-combined work is subject to the AGPL is a fact-specific legal question; architectural labels do not
-override the license.
+combined work is subject to the AGPL depends on how it is built and distributed; architectural labels
+do not override the license.
 
 ## Third-party components and data
 
@@ -38,6 +38,6 @@ are responsible for their source agreements, privacy obligations, and rights to 
 
 ## Contributions
 
-External code contributions are temporarily paused until a lawyer-reviewed contributor agreement is
-adopted. This preserves clear copyright ownership and the ability to offer commercial licenses later.
-Issues, design discussion, and security reports remain welcome under the policies in this repository.
+External code contributions are temporarily paused until the project publishes a contributor
+agreement compatible with both AGPL distribution and optional commercial licensing. Issues, design
+discussion, and security reports remain welcome under the policies in this repository.
