@@ -89,6 +89,68 @@ wheels = [
 ]
 
 [[package]]
+name = "c2cdirect-api"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "asyncpg" },
+    { name = "fastapi" },
+    { name = "httpx" },
+    { name = "langchain" },
+    { name = "langchain-openai" },
+    { name = "langchain-postgres" },
+    { name = "langgraph" },
+    { name = "mcp" },
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-exporter-otlp-proto-http" },
+    { name = "opentelemetry-sdk" },
+    { name = "psycopg", extra = ["binary"] },
+    { name = "pydantic" },
+    { name = "pydantic-settings" },
+    { name = "pyjwt", extra = ["crypto"] },
+    { name = "stripe" },
+    { name = "structlog" },
+    { name = "tenacity" },
+    { name = "uvicorn", extra = ["standard"] },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "pytest-cov" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "asyncpg", specifier = ">=0.30,<1" },
+    { name = "fastapi", specifier = ">=0.116,<1" },
+    { name = "httpx", specifier = ">=0.28,<1" },
+    { name = "langchain", specifier = ">=0.3,<1" },
+    { name = "langchain-openai", specifier = ">=0.3,<1" },
+    { name = "langchain-postgres", specifier = ">=0.0.15,<1" },
+    { name = "langgraph", specifier = ">=0.6,<1" },
+    { name = "mcp", specifier = ">=1.13,<2" },
+    { name = "opentelemetry-api", specifier = ">=1.36,<2" },
+    { name = "opentelemetry-exporter-otlp-proto-http", specifier = ">=1.36,<2" },
+    { name = "opentelemetry-sdk", specifier = ">=1.36,<2" },
+    { name = "psycopg", extras = ["binary"], specifier = ">=3.2,<4" },
+    { name = "pydantic", specifier = ">=2.11,<3" },
+    { name = "pydantic-settings", specifier = ">=2.10,<3" },
+    { name = "pyjwt", extras = ["crypto"], specifier = ">=2.10,<3" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4,<9" },
+    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=1,<2" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6,<8" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.12,<1" },
+    { name = "stripe", specifier = ">=12,<13" },
+    { name = "structlog", specifier = ">=25,<26" },
+    { name = "tenacity", specifier = ">=9,<10" },
+    { name = "uvicorn", extras = ["standard"], specifier = ">=0.35,<1" },
+]
+provides-extras = ["dev"]
+
+[[package]]
 name = "certifi"
 version = "2026.7.22"
 source = { registry = "https://pypi.org/simple" }
@@ -479,68 +541,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/1f/ab/89e2b798d2c3925f82e2bb72d5979f3d2f6da2dd22ef4a8cd8b70d920039/cryptography-50.0.1-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:2a93d05e34d5f67fba6f891fe85d929999baa7195e853923ea6d7576c9e68c5e", size = 5044355, upload-time = "2026-08-25T19:45:22.353Z" },
     { url = "https://files.pythonhosted.org/packages/99/89/87ef49ffe383ef4e147d27b7bf2088fb0b54ea409dd87b5a89442e5828a5/cryptography-50.0.1-cp39-abi3-win_amd64.whl", hash = "sha256:55d16b1ef3ee0958d893a977b19777887e546c9954ea81b200c3301a864013f2", size = 3875429, upload-time = "2026-08-25T19:45:24.418Z" },
 ]
-
-[[package]]
-name = "c2cdirect-api"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "asyncpg" },
-    { name = "fastapi" },
-    { name = "httpx" },
-    { name = "langchain" },
-    { name = "langchain-openai" },
-    { name = "langchain-postgres" },
-    { name = "langgraph" },
-    { name = "mcp" },
-    { name = "opentelemetry-api" },
-    { name = "opentelemetry-exporter-otlp-proto-http" },
-    { name = "opentelemetry-sdk" },
-    { name = "psycopg", extra = ["binary"] },
-    { name = "pydantic" },
-    { name = "pydantic-settings" },
-    { name = "pyjwt", extra = ["crypto"] },
-    { name = "stripe" },
-    { name = "structlog" },
-    { name = "tenacity" },
-    { name = "uvicorn", extra = ["standard"] },
-]
-
-[package.optional-dependencies]
-dev = [
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-cov" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "asyncpg", specifier = ">=0.30,<1" },
-    { name = "fastapi", specifier = ">=0.116,<1" },
-    { name = "httpx", specifier = ">=0.28,<1" },
-    { name = "langchain", specifier = ">=0.3,<1" },
-    { name = "langchain-openai", specifier = ">=0.3,<1" },
-    { name = "langchain-postgres", specifier = ">=0.0.15,<1" },
-    { name = "langgraph", specifier = ">=0.6,<1" },
-    { name = "mcp", specifier = ">=1.13,<2" },
-    { name = "opentelemetry-api", specifier = ">=1.36,<2" },
-    { name = "opentelemetry-exporter-otlp-proto-http", specifier = ">=1.36,<2" },
-    { name = "opentelemetry-sdk", specifier = ">=1.36,<2" },
-    { name = "psycopg", extras = ["binary"], specifier = ">=3.2,<4" },
-    { name = "pydantic", specifier = ">=2.11,<3" },
-    { name = "pydantic-settings", specifier = ">=2.10,<3" },
-    { name = "pyjwt", extras = ["crypto"], specifier = ">=2.10,<3" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4,<9" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=1,<2" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=6,<8" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.12,<1" },
-    { name = "stripe", specifier = ">=12,<13" },
-    { name = "structlog", specifier = ">=25,<26" },
-    { name = "tenacity", specifier = ">=9,<10" },
-    { name = "uvicorn", extras = ["standard"], specifier = ">=0.35,<1" },
-]
-provides-extras = ["dev"]
 
 [[package]]
 name = "distro"
@@ -2144,11 +2144,11 @@ wheels = [
 
 [[package]]
 name = "urllib3"
-version = "2.7.0"
+version = "2.8.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c", size = 433602, upload-time = "2026-05-07T16:13:18.596Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e3/05/b17359e1cefb4f909b5e40b1b90a496d987258916dbbf88e842c729f510e/urllib3-2.8.0.tar.gz", hash = "sha256:63bf2ead4c879426ebf22ef2a781eeb4aa3b4ae798a0435506f8687fd5bb9b63", size = 458972, upload-time = "2026-09-15T19:29:36.253Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7f/3e/5db95bcf282c52709639744ca2a8b149baccf648e39c8cc87553df9eae0c/urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897", size = 131087, upload-time = "2026-05-07T16:13:17.151Z" },
+    { url = "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl", hash = "sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3", size = 135717, upload-time = "2026-09-15T19:29:34.577Z" },
 ]
 
 [[package]]
